@@ -1,6 +1,6 @@
 # First-AWS-Project
 
-
+[![AWS VPC Architecture](aws_vpc_diagram.png)](aws_vpc_diagram.png)
 
 ## 🎯 Project Overview
 
@@ -28,3 +28,17 @@ VPC: demo_vpc (10.0.0.0/16)
 ├── Public Route Table (0.0.0.0/0 → IGW)
 └── Private Route Table (0.0.0.0/0 → NAT)
 ```
+
+## 📁 Project Structure
+```
+First-AWS-Project/
+├── main.tf              # Core infrastructure
+├── variables.tf         # Configurable parameters
+├── outputs.tf           # Queryable resource IDs
+├── terraform.tfvars     # Environment overrides
+├── aws_vpc_diagram.png  # Architecture visualization
+└── README.md           # You're reading it!
+```
+
+
+
