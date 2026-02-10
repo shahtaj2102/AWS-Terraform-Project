@@ -1,4 +1,4 @@
-# First-AWS-Project
+# AWS-Terraform-Project
 
 [![AWS VPC Architecture](aws_vpc_diagram.png)](aws_vpc_diagram.png)
 
