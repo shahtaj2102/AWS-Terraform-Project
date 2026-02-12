@@ -41,4 +41,12 @@ First-AWS-Project/
 ```
 
 
+## 🚀 Quick Start
+
+1. **Prerequisites**
+   # Install Terraform
+   # AWS CLI configured with credentials
+   aws configure
+
+
 
