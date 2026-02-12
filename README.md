@@ -44,9 +44,14 @@ First-AWS-Project/
 ## 🚀 Quick Start
 
 1. **Prerequisites**
-   # Install Terraform
-   # AWS CLI configured with credentials
+   Install Terraform
+   AWS CLI configured with credentials
    aws configure
 
+2. **Deploy**
+   terraform init
+   terraform validate
+   terraform plan
+   terraform apply
 
 
