@@ -126,11 +126,16 @@ VPC: 10.0.0.0/16 (65,536 IPs)
 
 ✅ Route table associations
 
-📄 License
-MIT License - See LICENSE for details.
+## 📄 License
 
-👨‍💻 Author
-Shahtaj - Aspiring Cloud/DevOps Engineer
-LinkedIn | GitHub
+MIT License - See [LICENSE](LICENSE) for details.
 
-⭐ Star this repo if it helped your AWS journey! ⭐
+## 👨‍💻 Author
+
+**Shaht** - Aspiring Cloud/DevOps Engineer  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shaht/) [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shaht)
+
+---
+
+⭐ **Star this repo if it helped your AWS journey!** ⭐
+
