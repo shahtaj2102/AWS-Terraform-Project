@@ -81,3 +81,17 @@ terraform destroy
 | `vpc_cidr`        | `10.0.0.0/16`    | VPC IP range           |
 | `private_subnets` | `{0,1,2}`        | AZ index mapping       |
 
+
+## 🛠️ Resources Created
+
+| Resource                      | Count | Purpose                    |
+|-------------------------------|-------|----------------------------|
+| `aws_vpc`                     | 1     | Main networking container  |
+| `aws_subnet.public`           | 3     | Internet-facing workloads  |
+| `aws_subnet.private`          | 3     | Database/EC2 (secure)      |
+| `aws_internet_gateway`        | 1     | Public internet access     |
+| `aws_eip`                     | 1     | NAT Gateway static IP      |
+| `aws_nat_gateway`             | 1     | Private subnet outbound    |
+| `aws_route_table`             | 2     | Public/private routing     |
+| `aws_route_table_association` | 6     | Subnet-route table links   |
+
