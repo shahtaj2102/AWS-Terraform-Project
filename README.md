@@ -132,10 +132,11 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ## 👨‍💻 Author
 
-**Shaht** - Aspiring Cloud/DevOps Engineer  
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shaht/) [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shaht)
+**Shahtaj** - Aspiring Cloud/DevOps Engineer (AWS SAP Certified)  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shahtaj-aws-sap-toronto/) [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shahtaj2102)
 
 ---
 
 ⭐ **Star this repo if it helped your AWS journey!** ⭐
+
 
