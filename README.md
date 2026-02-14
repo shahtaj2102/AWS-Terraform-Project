@@ -51,9 +51,8 @@ First-AWS-Project/
 
    aws configure
 
-3. **Deploy**
-   
-
+2. **Deploy**
+```
    terraform init
 
    terraform validate
@@ -61,16 +60,17 @@ First-AWS-Project/
    terraform plan
 
    terraform apply
+```
+3. **access resources**
 
-5.**Access Resources**
-  
    terraform output vpc_id
    
    terraform output public_subnet_ids
 
  4.**Cleanup**
-   
-    terraform destroy
+ ```
+terraform destroy
+```
 
 ## Configuration
 Variable	Default	Description
