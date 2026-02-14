@@ -44,21 +44,38 @@ First-AWS-Project/
 ## 🚀 Quick Start
 
 1. **Prerequisites**
+   
    Install Terraform
+
    AWS CLI configured with credentials
+
    aws configure
 
-2. **Deploy**
+3. **Deploy**
+   
+
    terraform init
+
    terraform validate
+
    terraform plan
+
    terraform apply
 
-3. **Access Resources**
+5.**Access Resources**
+  
    terraform output vpc_id
+   
    terraform output public_subnet_ids
 
  4.**Cleanup**
+   
     terraform destroy
 
-
+## Configuration
+Variable	Default	Description
+aws_region	us-east-1	AWS deployment region
+vpc_name	demo_vpc	VPC display name
+vpc_cidr	10.0.0.0/16	VPC IP range
+private_subnets	{0,1,2}	AZ index mapping
+Customize via terraform.tfvars:
