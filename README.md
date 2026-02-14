@@ -96,9 +96,10 @@ terraform destroy
 | `aws_route_table_association` | 6     | Subnet-route table links   |
 
 
-##🔍 CIDR Breakdown
+## 🔍 CIDR Breakdown
 
 VPC: 10.0.0.0/16 (65,536 IPs)
+```
 ├── Public Subnets:
 │   ├── AZ1: 10.0.1.0/24 (256 IPs)
 │   ├── AZ2: 10.0.2.0/24 (256 IPs)  
@@ -107,3 +108,20 @@ VPC: 10.0.0.0/16 (65,536 IPs)
     ├── AZ1: 10.0.1.0/24 (256 IPs)
     ├── AZ2: 10.0.2.0/24 (256 IPs)
     └── AZ3: 10.0.3.0/24 (256 IPs)
+```
+
+## 🏆 Learning Outcomes
+
+✅ VPC networking fundamentals
+
+✅ Public/private subnet isolation
+
+✅ High availability with multiple AZs
+
+✅ NAT Gateway for secure outbound
+
+✅ Terraform for_each patterns
+
+✅ cidrsubnet() function mastery
+
+✅ Route table associations
