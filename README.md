@@ -125,3 +125,12 @@ VPC: 10.0.0.0/16 (65,536 IPs)
 ✅ cidrsubnet() function mastery
 
 ✅ Route table associations
+
+📄 License
+MIT License - See LICENSE for details.
+
+👨‍💻 Author
+Shahtaj - Aspiring Cloud/DevOps Engineer
+LinkedIn | GitHub
+
+⭐ Star this repo if it helped your AWS journey! ⭐
