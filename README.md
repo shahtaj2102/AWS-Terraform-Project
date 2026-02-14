@@ -95,3 +95,15 @@ terraform destroy
 | `aws_route_table`             | 2     | Public/private routing     |
 | `aws_route_table_association` | 6     | Subnet-route table links   |
 
+
+##🔍 CIDR Breakdown
+
+VPC: 10.0.0.0/16 (65,536 IPs)
+├── Public Subnets:
+│   ├── AZ1: 10.0.1.0/24 (256 IPs)
+│   ├── AZ2: 10.0.2.0/24 (256 IPs)  
+│   └── AZ3: 10.0.101.0/24 (256 IPs)
+└── Private Subnets:
+    ├── AZ1: 10.0.1.0/24 (256 IPs)
+    ├── AZ2: 10.0.2.0/24 (256 IPs)
+    └── AZ3: 10.0.3.0/24 (256 IPs)
