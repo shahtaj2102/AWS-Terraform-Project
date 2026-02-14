@@ -54,4 +54,11 @@ First-AWS-Project/
    terraform plan
    terraform apply
 
+3. **Access Resources**
+   terraform output vpc_id
+   terraform output public_subnet_ids
+
+ 4.**Cleanup**
+    terraform destroy
+
 
