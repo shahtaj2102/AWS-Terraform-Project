@@ -72,10 +72,12 @@ First-AWS-Project/
 terraform destroy
 ```
 
-## Configuration
-Variable	Default	Description
-aws_region	us-east-1	AWS deployment region
-vpc_name	demo_vpc	VPC display name
-vpc_cidr	10.0.0.0/16	VPC IP range
-private_subnets	{0,1,2}	AZ index mapping
-Customize via terraform.tfvars:
+## 🔧 Configuration
+
+| Variable          | Default          | Description            |
+|-------------------|------------------|------------------------|
+| `aws_region`      | `us-east-1`      | AWS deployment region  |
+| `vpc_name`        | `demo_vpc`       | VPC display name       |
+| `vpc_cidr`        | `10.0.0.0/16`    | VPC IP range           |
+| `private_subnets` | `{0,1,2}`        | AZ index mapping       |
+
