@@ -124,7 +124,7 @@ VPC: 10.0.0.0/16 (65,536 IPs)
 
 ✅ cidrsubnet() function mastery
 
-✅ Route table associations
+✅ Route table associations.
 
 ## 📄 License
 
