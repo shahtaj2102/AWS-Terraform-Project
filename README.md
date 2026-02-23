@@ -112,17 +112,17 @@ VPC: 10.0.0.0/16 (65,536 IPs)
 
 ## 🏆 Learning Outcomes
 
-✅ VPC networking fundamentals
+✅ VPC networking fundamentals.
 
-✅ Public/private subnet isolation
+✅ Public/private subnet isolation.
 
-✅ High availability with multiple AZs
+✅ High availability with multiple AZs.
 
-✅ NAT Gateway for secure outbound
+✅ NAT Gateway for secure outbound.
 
-✅ Terraform for_each patterns
+✅ Terraform for_each patterns.
 
-✅ cidrsubnet() function mastery
+✅ cidrsubnet() function mastery.
 
 ✅ Route table associations.
 
