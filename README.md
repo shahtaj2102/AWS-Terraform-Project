@@ -14,7 +14,7 @@ This Terraform project deploys a **production-ready AWS VPC** with public and pr
 - Auto-assigned public IPs on public subnets
 - Secure routing with dedicated route tables
 
-## 🏗️ Architecture Diagram
+## 🏗️ Architecture Diagram.
 
 ![AWS VPC Architecture](aws_vpc_diagram.png)
 
