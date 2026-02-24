@@ -2,7 +2,7 @@
 
 [![AWS VPC Architecture](aws_vpc_diagram.png)](aws_vpc_diagram.png)
 
-## 🎯 Project Overview
+## 🎯 Project Overview.
 
 This Terraform project deploys a **production-ready AWS VPC** with public and private subnets across multiple Availability Zones, complete with Internet Gateway for public access and NAT Gateway for secure private outbound connectivity. Perfect for your first AWS infrastructure project!
 
