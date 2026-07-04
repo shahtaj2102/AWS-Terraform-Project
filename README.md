@@ -1,142 +1,89 @@
-# AWS-Terraform-Project
+# AWS Multi-AZ VPC Networking Foundation (Terraform)
 
 [![AWS VPC Architecture](aws_vpc_diagram.png)](aws_vpc_diagram.png)
 
-## 🎯 Project Overview.
+A Terraform configuration that provisions a production-style, multi-AZ VPC networking foundation on AWS — public and private subnets across three Availability Zones, Internet Gateway, NAT Gateway, and route tables, built with infrastructure as code.
 
-This Terraform project deploys a **production-ready AWS VPC** with public and private subnets across multiple Availability Zones, complete with Internet Gateway for public access and NAT Gateway for secure private outbound connectivity. Perfect for your first AWS infrastructure project!
+This project focuses on the **networking layer**. It does not currently deploy any compute resources (EC2, load balancers, or auto scaling) — it's the foundation that a compute or application layer would sit on top of.
 
-**Key Features:**
-- 3-tier VPC architecture (10.0.0.0/16)
-- 3 Public subnets (direct internet access)
-- 3 Private subnets (NAT Gateway outbound only)
-- High availability across 3 AZs
-- Auto-assigned public IPs on public subnets
-- Secure routing with dedicated route tables
+## What It Builds
 
-## 🏗️ Architecture Diagram.
+- 1 VPC (`10.0.0.0/16`)
+- 3 public subnets, one per Availability Zone
+- 3 private subnets, one per Availability Zone
+- 1 Internet Gateway (for public subnet internet access)
+- 1 NAT Gateway with an Elastic IP (for private subnet outbound internet access)
+- Route tables and associations wiring public subnets to the Internet Gateway and private subnets to the NAT Gateway
 
-![AWS VPC Architecture](aws_vpc_diagram.png)
+## Architecture
 
-**What gets created:**
+The diagram above illustrates the general pattern implemented — a VPC spanning three Availability Zones, each with a paired public and private subnet, a single NAT Gateway with an Elastic IP, and separate public/private route tables. (Note: the CIDR values shown in the diagram are illustrative placeholders — see the exact ranges used in this project in the table below.)
+
+All three private subnets route outbound traffic through a single shared NAT Gateway located in the first public subnet.
+
+## Subnet CIDR Breakdown
+
+| Subnet | AZ | CIDR Block | Type |
+|---|---|---|---|
+| public_subnet_1 | AZ 1 | 10.0.101.0/24 | Public |
+| public_subnet_2 | AZ 2 | 10.0.102.0/24 | Public |
+| public_subnet_3 | AZ 3 | 10.0.103.0/24 | Public |
+| private_subnet_1 | AZ 1 | 10.0.1.0/24 | Private |
+| private_subnet_2 | AZ 2 | 10.0.2.0/24 | Private |
+| private_subnet_3 | AZ 3 | 10.0.3.0/24 | Private |
+
+Subnet CIDRs are calculated dynamically with Terraform's `cidrsubnet()` function rather than hardcoded, so the ranges scale automatically if the base VPC CIDR changes.
+
+## Project Structure
+
 ```
-VPC: demo_vpc (10.0.0.0/16)
-├── Public Subnets (3 AZs): 10.0.x.0/24 → Internet Gateway
-├── Private Subnets (3 AZs): 10.0.y.0/24 → NAT Gateway  
-├── Internet Gateway (IGW)
-├── NAT Gateway + Elastic IP (public_subnet_1)
-├── Public Route Table (0.0.0.0/0 → IGW)
-└── Private Route Table (0.0.0.0/0 → NAT)
+.
+├── main.tf        # VPC, subnets, route tables, IGW, NAT Gateway, EIP
+├── variable.tf    # Input variable declarations
+├── output.tf      # Output values
+├── terraform.tf   # Terraform version and provider requirements
 ```
 
-## 📁 Project Structure
-```
-First-AWS-Project/
-├── main.tf              # Core infrastructure
-├── variables.tf         # Configurable parameters
-├── outputs.tf           # Queryable resource IDs
-├── terraform.tfvars     # Environment overrides
-├── aws_vpc_diagram.png  # Architecture visualization
-└── README.md           # You're reading it!
-```
+## Requirements
 
+| Name | Version |
+|---|---|
+| Terraform | >= 1.0.0 |
+| AWS Provider | >= 6.31.0 |
+| AWS Account | Active, with credentials configured locally (e.g. via `aws configure`) |
 
-## 🚀 Quick Start
+## Usage
 
-1. **Prerequisites**
-   
-   Install Terraform
+```bash
+# Initialize Terraform and download the AWS provider
+terraform init
 
-   AWS CLI configured with credentials
+# Preview the resources that will be created
+terraform plan
 
-   aws configure
+# Provision the infrastructure
+terraform apply
 
-2. **Deploy**
-```
-   terraform init
-
-   terraform validate
-
-   terraform plan
-
-   terraform apply
-```
-3. **access resources**
-
-   terraform output vpc_id
-   
-   terraform output public_subnet_ids
-
- 4.**Cleanup**
- ```
+# Tear everything down when finished
 terraform destroy
 ```
 
-## 🔧 Configuration
+## Outputs
 
-| Variable          | Default          | Description            |
-|-------------------|------------------|------------------------|
-| `aws_region`      | `us-east-1`      | AWS deployment region  |
-| `vpc_name`        | `demo_vpc`       | VPC display name       |
-| `vpc_cidr`        | `10.0.0.0/16`    | VPC IP range           |
-| `private_subnets` | `{0,1,2}`        | AZ index mapping       |
+| Output | Description |
+|---|---|
+| `vpc_id` | The ID of the created VPC |
 
+## Possible Improvements
 
-## 🛠️ Resources Created
+This project intentionally stays scoped to the networking layer. Some known limitations and natural next steps:
 
-| Resource                      | Count | Purpose                    |
-|-------------------------------|-------|----------------------------|
-| `aws_vpc`                     | 1     | Main networking container  |
-| `aws_subnet.public`           | 3     | Internet-facing workloads  |
-| `aws_subnet.private`          | 3     | Database/EC2 (secure)      |
-| `aws_internet_gateway`        | 1     | Public internet access     |
-| `aws_eip`                     | 1     | NAT Gateway static IP      |
-| `aws_nat_gateway`             | 1     | Private subnet outbound    |
-| `aws_route_table`             | 2     | Public/private routing     |
-| `aws_route_table_association` | 6     | Subnet-route table links   |
+- **Single NAT Gateway**: all private subnets currently share one NAT Gateway for simplicity and cost. A production setup would typically use one NAT Gateway per AZ for high availability.
+- **Unused `aws_region` variable**: the variable is declared but the provider block currently hardcodes `us-east-1` directly rather than referencing it.
+- **No compute layer yet**: this repo does not include EC2 instances, an Application Load Balancer, or Auto Scaling — it's a foundation that a future compute/application layer could build on.
+- **Limited outputs**: only `vpc_id` is currently exported; subnet IDs and the NAT Gateway ID would be useful additions for downstream modules.
 
+## Author
 
-## 🔍 CIDR Breakdown
-
-VPC: 10.0.0.0/16 (65,536 IPs)
-```
-├── Public Subnets:
-│   ├── AZ1: 10.0.1.0/24 (256 IPs)
-│   ├── AZ2: 10.0.2.0/24 (256 IPs)  
-│   └── AZ3: 10.0.101.0/24 (256 IPs)
-└── Private Subnets:
-    ├── AZ1: 10.0.1.0/24 (256 IPs)
-    ├── AZ2: 10.0.2.0/24 (256 IPs)
-    └── AZ3: 10.0.3.0/24 (256 IPs)
-```
-
-## 🏆 Learning Outcomes
-
-✅ VPC networking fundamentals.
-
-✅ Public/private subnet isolation.
-
-✅ High availability with multiple AZs.
-
-✅ NAT Gateway for secure outbound.
-
-✅ Terraform for_each patterns.
-
-✅ cidrsubnet() function mastery.
-
-✅ Route table associations.
-
-## 📄 License
-
-MIT License - See [LICENSE](LICENSE) for details.
-
-## 👨‍💻 Author
-
-**Shahtaj** - Aspiring Cloud/DevOps Engineer (AWS SAP Certified)  
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shahtaj-singh-gill/) [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shahtaj2102)
-
----
-
-⭐ **Star this repo if it helped your AWS journey!** ⭐
-
-
+Shahtaj Singh Gill
+[LinkedIn](https://www.linkedin.com/in/shahtaj-aws-sap-toronto/) · [GitHub](https://github.com/shahtaj2102)
