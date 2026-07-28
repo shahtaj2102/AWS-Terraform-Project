@@ -82,7 +82,7 @@ After `apply` finishes, open the `alb_dns_name` output value in a browser - it t
 
 Tested end-to-end on July 28, 2026: ran `terraform apply` (25 resources created), confirmed the `alb_dns_name` output served the real PrintFlow dashboard end-to-end (internet -> ALB -> target group -> EC2 instance -> PrintFlow, pulled live from the `web-app-on-digitalocean` repo), then ran `terraform destroy` to tear the stack back down cleanly.
 
-![PrintFlow served live through the ALB](d6e314f8-b2ff-449e-8d9f-74a939c4a071-1785276141546_image.png)
+![PrintFlow served live through the ALB](printflow-live-demo.png)
 
 ## Outputs
 
