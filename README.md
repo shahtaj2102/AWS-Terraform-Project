@@ -18,7 +18,7 @@ Traffic flow: **Internet to Application Load Balancer (public subnets) to Target
 
 **Compute:**
 - Security groups: one for the ALB (accepts HTTP from the internet), one for the instances (only accepts traffic from the ALB, never directly from the internet)
-- A launch template (latest Amazon Linux 2023 AMI, looked up dynamically) with minimal user data that installs and starts a basic web server
+- A launch template (latest Amazon Linux 2023 AMI, looked up dynamically) whose user data installs httpd and pulls the real PrintFlow dashboard (index.html, styles.css, script.js) from the web-app-on-digitalocean repo
 - An Auto Scaling Group (default: 2 instances, scales 1-3) running in the private subnets
 - An Application Load Balancer in the public subnets, with a target group and listener forwarding HTTP traffic to the instances
 
@@ -78,6 +78,12 @@ terraform destroy
 
 After `apply` finishes, open the `alb_dns_name` output value in a browser - it takes a few minutes for the Auto Scaling Group's instances to pass the load balancer's health check the first time.
 
+## Verified Working
+
+Tested end-to-end on July 28, 2026: ran `terraform apply` (25 resources created), confirmed the `alb_dns_name` output served the real PrintFlow dashboard end-to-end (internet -> ALB -> target group -> EC2 instance -> PrintFlow, pulled live from the `web-app-on-digitalocean` repo), then ran `terraform destroy` to tear the stack back down cleanly.
+
+![PrintFlow served live through the ALB](d6e314f8-b2ff-449e-8d9f-74a939c4a071-1785276141546_image.png)
+
 ## Outputs
 
 | Output | Description |
@@ -87,13 +93,15 @@ After `apply` finishes, open the `alb_dns_name` output value in a browser - it t
 
 ## Possible Improvements
 
-- **Single NAT Gateway**: all private subnets currently share one NAT Gateway for simplicity and cost. A production setup would typically use one NAT Gateway per AZ for high availability.
-- **Unused `aws_region` variable**: the variable is declared but the provider block currently hardcodes `us-east-1` directly rather than referencing it.
-- **HTTP only**: the ALB listener is currently HTTP on port 80, not HTTPS - a real production setup would add an ACM certificate and an HTTPS listener.
-- **No autoscaling policies yet**: the Auto Scaling Group has fixed min/max/desired sizing rather than scaling on a CloudWatch metric (e.g. CPU utilization).
-- **Limited outputs**: subnet IDs, security group IDs, and the NAT Gateway ID would be useful additions for downstream modules.
+- Single NAT Gateway: all private subnets currently share one NAT Gateway for simplicity and cost. A production setup would typically use one NAT Gateway per AZ for high availability.
+- Unused `aws_region` variable: the variable is declared but the provider block currently hardcodes `us-east-1` directly rather than referencing it.
+- HTTP only: the ALB listener is currently HTTP on port 80, not HTTPS - a real production setup would add an ACM certificate and an HTTPS listener.
+- No autoscaling policies yet: the Auto Scaling Group has fixed min/max/desired sizing rather than scaling on a CloudWatch metric (e.g. CPU utilization).
+- Limited outputs: subnet IDs, security group IDs, and the NAT Gateway ID would be useful additions for downstream modules.
+- user_data fetches PrintFlow at boot only: instances already running won't pick up changes to the PrintFlow files automatically - only newly launched instances will.
 
 ## Author
 
 Shahtaj Singh Gill
 [LinkedIn](https://www.linkedin.com/in/shahtaj-toronto-gta/) · [GitHub](https://github.com/shahtaj2102)
+  
