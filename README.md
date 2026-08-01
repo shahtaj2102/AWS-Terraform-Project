@@ -93,7 +93,7 @@ Tested end-to-end on July 28, 2026: ran `terraform apply` (25 resources created)
 
 ## Possible Improvements
 
-- Single NAT Gateway: all private subnets currently share one NAT Gateway for simplicity and cost. A production setup would typically use one NAT Gateway per AZ for high availability.
+- Single NAT Gateway: all private subnets currently share one NAT Gateway for simplicity and cost savings. A production setup would typically use one NAT Gateway per AZ for high availability.
 - Unused `aws_region` variable: the variable is declared but the provider block currently hardcodes `us-east-1` directly rather than referencing it.
 - HTTP only: the ALB listener is currently HTTP on port 80, not HTTPS - a real production setup would add an ACM certificate and an HTTPS listener.
 - No autoscaling policies yet: the Auto Scaling Group has fixed min/max/desired sizing rather than scaling on a CloudWatch metric (e.g. CPU utilization).
