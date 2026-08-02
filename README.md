@@ -1,4 +1,4 @@
-# AWS Multi-AZ 3-Tier Architecture (Terraform).
+# AWS Multi-AZ 3-Tier Architecture (Terraform)
 
 [![AWS VPC Architecture](aws_vpc_diagram.png)](aws_vpc_diagram.png)
 
