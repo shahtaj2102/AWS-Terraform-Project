@@ -98,7 +98,7 @@ Tested end-to-end on July 28, 2026: ran `terraform apply` (25 resources created)
 - HTTP only: the ALB listener is currently HTTP on port 80, not HTTPS - a real production setup would add an ACM certificate and an HTTPS listener.
 - No autoscaling policies yet: the Auto Scaling Group has fixed min/max/desired sizing rather than scaling on a CloudWatch metric (e.g. CPU utilization).
 - Limited outputs: subnet IDs, security group IDs, and the NAT Gateway ID would be useful additions for downstream modules.
-- user_data fetches PrintFlow at boot only: instances already running won't pick up changes to the PrintFlow files automatically - only newly launched instances will.
+- `user_data` fetches PrintFlow at boot only: instances already running won't pick up changes to the PrintFlow files automatically - only newly launched instances will.
 
 ## Author
 
