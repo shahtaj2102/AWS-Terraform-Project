@@ -18,7 +18,7 @@ Traffic flow: **Internet to Application Load Balancer (public subnets) to Target
 
 **Compute:**
 - Security groups: one for the ALB (accepts HTTP from the internet), one for the instances (only accepts traffic from the ALB, never directly from the internet)
-- A launch template (latest Amazon Linux 2023 AMI, looked up dynamically) whose user data installs httpd and pulls the real PrintFlow dashboard (index.html, styles.css, script.js) from the web-app-on-digitalocean repo
+- A launch template (latest Amazon Linux 2023 AMI, looked up dynamically) whose user data installs httpd and pulls the real PrintFlow dashboard (index.html, styles.css, script.js) from the web-app-on-digitalocean repo.
 - An Auto Scaling Group (default: 2 instances, scales 1-3) running in the private subnets
 - An Application Load Balancer in the public subnets, with a target group and listener forwarding HTTP traffic to the instances
 
