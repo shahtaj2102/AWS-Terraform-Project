@@ -39,7 +39,7 @@ All three private subnets route outbound traffic through a single shared NAT Gat
 | private_subnet_2 | AZ 2 | 10.0.2.0/24 | Private |
 | private_subnet_3 | AZ 3 | 10.0.3.0/24 | Private |
 
-Subnet CIDRs are calculated dynamically with Terraform's `cidrsubnet()` function rather than hardcoded, so the ranges scale automatically if the base VPC CIDR changes.
+Subnet CIDRs are calculated dynamically with Terraform's `cidrsubnet()` function rather than being hardcoded, so the ranges scale automatically if the base VPC CIDR changes.
 
 ## Project Structure
 
